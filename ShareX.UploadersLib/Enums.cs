@@ -96,6 +96,8 @@ namespace ShareX.UploadersLib
         Box,
         [Description("MEGA")]
         Mega,
+	[Description("Up1")]
+	Up1,
         [Description("Amazon S3")]
         AmazonS3,
         [Description("ownCloud")]
