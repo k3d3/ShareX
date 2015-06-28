@@ -2633,7 +2633,7 @@ For example, if your bucket is called bucket.example.com then URL will be http:/
     <value>21</value>
   </data>
   <data name="tpUp1.Text" xml:space="preserve">
-    <value>Upload</value>
+    <value>Up1</value>
   </data>
   <data name="&gt;&gt;tpUp1.Name" xml:space="preserve">
     <value>tpUp1</value>
