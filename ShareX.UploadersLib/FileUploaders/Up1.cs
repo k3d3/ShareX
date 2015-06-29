@@ -62,6 +62,7 @@ namespace ShareX.UploadersLib.FileUploaders
             // Hash the output using sha512
             var sha512csp = new SHA512CryptoServiceProvider();
             var seed_output = sha512csp.ComputeHash(seed);
+            sha512csp.Dispose();
 
             // Take key from first 32 bytes
             key = new byte[32];
@@ -83,6 +84,7 @@ namespace ShareX.UploadersLib.FileUploaders
             var rngCsp = new RNGCryptoServiceProvider();
             var seed = new byte[16];
             rngCsp.GetBytes(seed);
+            rngCsp.Dispose();
             seed_encoded = UrlBase64Encode(seed);
 
             // Derive the parameters (key, IV, ident) from the seed
@@ -115,6 +117,8 @@ namespace ShareX.UploadersLib.FileUploaders
             var res = ccmMode.ProcessBytes(data, 0, data.Length, encBytes, 0);
             ccmMode.DoFinal(encBytes, res);
 
+            
+
             return new MemoryStream(encBytes);
         }
 
@@ -135,6 +139,8 @@ namespace ShareX.UploadersLib.FileUploaders
 
             // Upload and stream encrypt
             var result = UploadData(encryptedStream, SystemUrl + "/up", "blob", "file", uploadArgs);
+            encryptedStream.Close();
+            encryptedStream.Dispose();
 
             if (!result.IsSuccess) return result;
 
